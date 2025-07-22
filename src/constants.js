@@ -1,1 +1,1 @@
-export const DB_NAME = 'rjcodedev';
+export const DB_NAME = process.env.DB_NAME || "rjcodedev";

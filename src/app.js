@@ -16,6 +16,24 @@ app.use(express.static("public"));
 // Middleware to parse cookies
 app.use(cookieParser());
 
+
+// routes import
+import userRouter from  './routes/user.routes.js'
+
+
+
+
+
+// routes declaretion (e.g url/api/v1/users/register) 
+// register route comes from userRouter all there more route like login, etc
+app.use('/api/v1/users', userRouter)
+
+
+
+
+
+
+
 app.get("/", (req, res) => {
   res.send("Hey coders! Welcome to the backend of Chaicode.");
 });

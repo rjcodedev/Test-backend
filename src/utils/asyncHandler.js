@@ -1,14 +1,14 @@
 const asyncHandler = (requestHandler) => {
-  (req, res, next) => {
+  // callback function must return to avoid error
+  return (req, res, next) => {
     Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err));
   };
 };
 
 export { asyncHandler };
 
-// const asyncHandler=  () =>{}
-// const asyncHandler= (fn)=> {() =>{}}
-// const asyncHandler= (fn)=> () =>{}
+// const asyncHandler= () =>{}
+// const asyncHandler= (fn)=> () =>{} same as const asyncHandler= (fn)=> {return () =>{}}
 
 // const asyncHandler = (fn) => async (req, res, next) => {
 //   try {
