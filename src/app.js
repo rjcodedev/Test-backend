@@ -20,4 +20,4 @@ app.get("/", (req, res) => {
   res.send("Hey coders! Welcome to the backend of Chaicode.");
 });
 
-export { app };
+export { app }; // same export app
