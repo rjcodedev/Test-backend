@@ -1,9 +1,7 @@
-import dotenv from "dotenv";
-dotenv.config({ quiet: true });
+import 'dotenv/config'
 import connectDB from "./db/index.js";
 import { app } from "./app.js";
 const SERVER_PORT = process.env.PORT || 3000;
-
 connectDB()
   .then(() => {
     app.listen(SERVER_PORT, () => {

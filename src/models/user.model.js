@@ -53,12 +53,12 @@ const userSchema = new mongoose.Schema(
 // This middleware runs before the user document is saved to the database
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
-    this.password = await bcrypt.hash(password, this.password);
+    this.password = await bcrypt.hash(this.password, 10);
   }
   next();
 });
 
-userSchema.methods.isPasswordMatch = async function (password) {
+userSchema.methods.isPassworCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 

@@ -5,7 +5,6 @@ import { uploadCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 const registerUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "ok" });
 
   // get user details from request
   const { fullName, email, username, password } = req.body;
@@ -16,6 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
   ) {
     throw new ApiError(400, "All fiels is required.");
   }
+  console.log("password ", password)
   // check if user already present with username or email
   const existedUser = await User.findOne({ $or: [{ username }, { email }] });
   if (existedUser) {
@@ -23,8 +23,8 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // local file from multer
-  const avatarLocalPath = req.files?.avatar[0]?.path;
-  const coverImageLocalPath = req.files?.coverImage[0]?.path;
+  const avatarLocalPath = req.files?.avatar?.[0]?.path;
+  const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
 
   // check if avatar is present
   if (!avatarLocalPath) {
@@ -44,7 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
     avatar: avatar.url,
     coverImage: coverImage?.url || "",
     email: email?.toLowerCase(),
-    password,
+    password: password,
     username: username?.toLowerCase(),
   });
 
